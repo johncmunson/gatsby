@@ -24,6 +24,8 @@ const english = require(`retext-english`)
 const remark2retext = require(`remark-retext`)
 const stripPosition = require(`unist-util-remove-position`)
 const hastReparseRaw = require(`hast-util-raw`)
+const GithubSlugger = require('github-slugger')
+const slugger = new GithubSlugger()
 
 let fileNodes
 let pluginsCacheStr = ``
@@ -225,9 +227,11 @@ module.exports = (
       } else {
         const ast = await getAST(markdownNode)
         const headings = select(ast, `heading`).map(heading => {
+          const value = _.first(select(heading, `text`).map(text => text.value));
           return {
-            value: _.first(select(heading, `text`).map(text => text.value)),
+            value: value,
             depth: heading.depth,
+            relativeSlug: slugger(value),
           }
         })
 

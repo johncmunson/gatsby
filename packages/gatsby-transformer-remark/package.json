@@ -9,6 +9,7 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "bluebird": "^3.5.0",
+    "github-slugger": "^1.2.0",
     "gray-matter": "^4.0.0",
     "hast-util-raw": "^2.0.2",
     "hast-util-to-html": "^3.0.0",
